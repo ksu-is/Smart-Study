@@ -151,3 +151,81 @@ class StudyInputForm:
         self.notes_text.delete("1.0", tk.END)
         self._update_productivity_label(3)
 
+
+class ActionPanel:
+    """Panel with action buttons for viewing progress"""
+    
+    def __init__(self, parent: tk.Frame, callbacks: dict):
+        """
+        Initialize the action panel.
+        
+        Args:
+            parent: Parent tkinter frame
+            callbacks: Dictionary of callback functions for each action
+        """
+        self.parent = parent
+        self.callbacks = callbacks
+        self.stats_label = None
+        
+        self._create_panel()
+    
+    def _create_panel(self):
+        """Create the action panel widgets"""
+        
+        # Actions title
+        actions_title = tk.Label(
+            self.parent,
+            text="View Progress",
+            font=Constants.HEADING_FONT,
+            bg=Constants.WHITE,
+            fg=Constants.TEXT_COLOR
+        )
+        actions_title.pack(pady=15)
+        
+        # Action buttons
+        actions_container = tk.Frame(self.parent, bg=Constants.WHITE)
+        actions_container.pack(pady=20, padx=20, fill=tk.BOTH, expand=True)
+        
+        buttons_config = [
+            ("View Subject Distribution", "subject_distribution", Constants.SECONDARY_COLOR),
+            ("View Time Spent Chart", "time_chart", Constants.PURPLE_COLOR),
+            ("Weekly Summary", "weekly_summary", Constants.WARNING_COLOR),
+            ("View All Sessions", "all_sessions", "#3498db"),
+            ("Export CSV", "export_csv", "#16a085"),
+            ("Clear All Data", "clear_data", Constants.BUTTON_RED)
+        ]
+        
+        for text, callback_key, color in buttons_config:
+            tk.Button(
+                actions_container,
+                text=text,
+                command=self.callbacks.get(callback_key),
+                bg=color,
+                fg=Constants.WHITE,
+                font=Constants.NORMAL_FONT + ("bold",),
+                cursor="hand2",
+                height=2
+            ).pack(fill=tk.X, pady=10)
+        
+        # Stats display
+        stats_frame = tk.Frame(self.parent, bg=Constants.LIGHT_GRAY, 
+                              relief=tk.SUNKEN, borderwidth=2)
+        stats_frame.pack(pady=10, padx=20, fill=tk.X)
+        
+        self.stats_label = tk.Label(
+            stats_frame,
+            text="Total Sessions: 0\nTotal Time: 0 min",
+            font=Constants.SMALL_FONT,
+            bg=Constants.LIGHT_GRAY,
+            fg=Constants.DARK_GRAY,
+            justify=tk.LEFT
+        )
+        self.stats_label.pack(pady=10)
+    
+    def update_stats(self, session_count: int, total_time: int):
+        """Update statistics display"""
+        time_str = TimeFormatter.format_minutes(total_time)
+        self.stats_label.config(
+            text=f"Total Sessions: {session_count}\nTotal Time: {time_str}"
+        )
+
