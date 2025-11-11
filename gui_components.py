@@ -229,3 +229,82 @@ class ActionPanel:
             text=f"Total Sessions: {session_count}\nTotal Time: {time_str}"
         )
 
+
+class SessionsTable:
+    """Table view for displaying all study sessions"""
+    
+    @staticmethod
+    def create_window(sessions: list, parent: tk.Tk):
+        """
+        Create a window displaying all sessions in a table.
+        
+        Args:
+            sessions: List of study sessions
+            parent: Parent tkinter window
+        """
+        # Create new window
+        sessions_window = tk.Toplevel(parent)
+        sessions_window.title("All Study Sessions")
+        sessions_window.geometry("900x600")
+        
+        # Title
+        title = tk.Label(
+            sessions_window,
+            text="All Study Sessions",
+            font=Constants.HEADING_FONT,
+            bg=Constants.PRIMARY_COLOR,
+            fg=Constants.WHITE
+        )
+        title.pack(fill=tk.X, pady=10)
+        
+        # Create treeview
+        tree_frame = tk.Frame(sessions_window)
+        tree_frame.pack(fill=tk.BOTH, expand=True, padx=10, pady=10)
+        
+        # Scrollbars
+        vsb = ttk.Scrollbar(tree_frame, orient="vertical")
+        hsb = ttk.Scrollbar(tree_frame, orient="horizontal")
+        
+        # Treeview
+        tree = ttk.Treeview(
+            tree_frame,
+            columns=("timestamp", "subject", "duration", "productivity", "notes"),
+            show="headings",
+            yscrollcommand=vsb.set,
+            xscrollcommand=hsb.set
+        )
+        
+        vsb.config(command=tree.yview)
+        hsb.config(command=tree.xview)
+        
+        # Column headings
+        tree.heading("timestamp", text="Date & Time")
+        tree.heading("subject", text="Subject")
+        tree.heading("duration", text="Duration (min)")
+        tree.heading("productivity", text="Productivity")
+        tree.heading("notes", text="Notes")
+        
+        # Column widths
+        tree.column("timestamp", width=150)
+        tree.column("subject", width=150)
+        tree.column("duration", width=100)
+        tree.column("productivity", width=100)
+        tree.column("notes", width=300)
+        
+        # Add data (reverse order to show newest first)
+        for session in reversed(sessions):
+            tree.insert("", tk.END, values=(
+                session['timestamp'],
+                session['subject'],
+                session['duration'],
+                f"{session['productivity']}/5",
+                session['notes'][:50] + "..." if len(session['notes']) > 50 else session['notes']
+            ))
+        
+        # Pack tree and scrollbars
+        tree.grid(row=0, column=0, sticky="nsew")
+        vsb.grid(row=0, column=1, sticky="ns")
+        hsb.grid(row=1, column=0, sticky="ew")
+        
+        tree_frame.grid_rowconfigure(0, weight=1)
+        tree_frame.grid_columnconfigure(0, weight=1)
