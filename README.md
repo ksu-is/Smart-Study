@@ -38,25 +38,25 @@ A Smart study tracking application with GUI, data visualization, and progress mo
 
 1. **Clone the repository**:
    ```bash
-   git clone 
+   git clone https://github.com/pantwi1/tracker_app.git
    cd tracker_app
    ```
 
 2. **Create and activate a virtual environment**:
-   ```powershell
+   ```bash
    python -m venv .venv
-   .\.venv\Scripts\Activate.ps1
+   source .venv/bin/activate
    ```
 
 3. **Install dependencies**:
-   ```powershell
+   ```bash
    pip install matplotlib
    ```
 
 ## Usage
 
 Run the application:
-```powershell
+```bash
 python main.py
 ```
 
@@ -82,11 +82,6 @@ python main.py
 - Python 3.13+
 - tkinter
 - matplotlib
-
-## Data Storage
-
-Study sessions are stored in `data/study_data.json` with the following structure:
-
 
 
 ## License
