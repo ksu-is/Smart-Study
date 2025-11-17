@@ -38,7 +38,7 @@ A Smart study tracking application with GUI, data visualization, and progress mo
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/pantwi1/tracker_app.git
+   git clone https://github.com/ksu-is/Smart-Study.git
    cd tracker_app
    ```
 
@@ -64,7 +64,7 @@ python main.py
 
 1. Enter the subject name
 2. Enter duration in minutes
-3. Set productivity level (1-5) using the slider
+3. Set productivity level
 4. Add notes
 5. Click "Save Study Session"
 
