@@ -8,8 +8,8 @@ Users input what subject they studied, duration, and productivity level. The app
 
 **Target Audience**: High school and college students, plus self-learners studying online who want to track their effort across different topics.
 
-
 ### Completed Features
+
 - Log study sessions (subject, duration, productivity 1-5, notes) with timestamps
 - Store data locally in JSON format with persistence
 - Intuitive tkinter GUI with form validation
@@ -20,20 +20,25 @@ Users input what subject they studied, duration, and productivity level. The app
 - Motivational messages and color-coded productivity levels
 
 ### Technology Stack
+
 - **Python 3.13+** with tkinter (GUI), matplotlib (charts), JSON storage
 
 ## Future Enhancements
 
 ### Phase 4: Advanced Analytics
+
 - Daily study streaks, productivity trends, time heatmaps, goal tracking
 
 ### Phase 5: Notifications & Reminders
+
 - Study reminders, achievement badges
 
 ### Phase 6: Advanced Features
+
 - Multiple user profiles, cloud sync, mobile app,
 
 ## Similar Projects & Inspiration
+
 - [Study-Tracker/Study-Tracker](https://github.com/Study-Tracker/Study-Tracker) - Build workflows
 - [Pomodoro Study Tracking App](https://medium.com/@omerfarukcinar/pomodoro-study-tracking-app-with-tkinter-69986f5ae6f7) - Tkinter patterns
 
@@ -44,5 +49,3 @@ See [README.md](README.md) for detailed setup and usage instructions.
 ## License
 
 MIT License - see [LICENSE](LICENSE) file.
-
----
